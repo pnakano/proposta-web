@@ -1,0 +1,47 @@
+.responsive-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .responsive-container {
+    flex-direction: column;
+  }
+}
+
+.responsive-input {
+  width: 100%;
+}
+
+.right-align {
+  text-align: right;
+}
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.right-align {
+  -moz-appearance: textfield;
+}
+
+.base-card {
+  padding: 16px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.button-cancelar {
+  order: 1;
+}
+
+.button-salvar {
+  order: 2;
+}
