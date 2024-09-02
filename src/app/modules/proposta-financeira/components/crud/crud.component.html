@@ -1,55 +1,90 @@
-<mat-card appearance="outlined" class="base-card">
-  <form class="example-form">
+<mat-card class="mat-elevation-z4 base-card">
+  <form [formGroup]="crudForm" (submit)="postProposta()" class="example-form">
     <div class="responsive-container">
       <mat-form-field floatLabel="auto" class="responsive-input">
         <mat-label>Nome</mat-label>
-        <input matInput />
+        <input matInput type="text" id="nome" formControlName="nome" required />
       </mat-form-field>
 
       <mat-form-field floatLabel="auto" class="responsive-input">
         <mat-label>Sobrenome</mat-label>
-        <input matInput />
+        <input
+          matInput
+          type="text"
+          id="sobrenome"
+          formControlName="sobrenome"
+          required
+        />
       </mat-form-field>
     </div>
 
     <mat-form-field class="responsive-input">
       <mat-label>Email</mat-label>
       <input
-        type="email"
         matInput
-        [formControl]="emailFormControl"
-        placeholder="Ex. pat@example.com"
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        placeholder="Ex. exemplo@email.com"
       />
-      @if (emailFormControl.hasError('email') &&
-      !emailFormControl.hasError('required')) {
-      <mat-error>Endereço de e-mail inválido!</mat-error>
-      } @if (emailFormControl.hasError('required')) {
-      <mat-error>E-mail é <strong>obrigatório</strong></mat-error>
-      }
     </mat-form-field>
+    <input-error [formGroup]="crudForm" controlName="email" />
 
     <mat-form-field floatLabel="always" class="responsive-input">
       <mat-label>Telefone</mat-label>
       <span matTextPrefix>+55 &nbsp;</span>
-      <input type="tel" matInput placeholder="11" />
+      <input
+        matInput
+        type="text"
+        id="telefone"
+        formControlName="telefone"
+        required
+        placeholder="(11) 99999-9999"
+        mask="(00) 00000-0000"
+      />
     </mat-form-field>
 
     <mat-form-field floatLabel="always" class="responsive-input">
       <mat-label>CPF</mat-label>
-      <input type="tel" matInput placeholder="123.456.789-10" />
+      <input
+        matInput
+        type="text"
+        id="cpf"
+        formControlName="cpf"
+        required
+        placeholder="012.345.678-10"
+        mask="000.000.000-00"
+      />
     </mat-form-field>
 
     <div class="responsive-container">
       <mat-form-field floatLabel="always" class="responsive-input">
         <mat-label>Renda</mat-label>
-        <input matInput type="number" class="right-align" placeholder="0" />
+        <input
+          matInput
+          type="number"
+          id="renda"
+          formControlName="renda"
+          required
+          class="right-align"
+          placeholder="0"
+        />
         <span matTextPrefix>R$&nbsp;</span>
         <span matTextSuffix>,00</span>
       </mat-form-field>
 
       <mat-form-field floatLabel="always" class="responsive-input">
         <mat-label>Valor Solicitado</mat-label>
-        <input matInput type="number" class="right-align" placeholder="0" />
+        <input
+          matInput
+          type="number"
+          id="valorSolicitado"
+          formControlName="valorSolicitado"
+          required
+          class="right-align"
+          placeholder="0"
+        />
         <span matTextPrefix>R$&nbsp;</span>
         <span matTextSuffix>,00</span>
       </mat-form-field>
@@ -60,14 +95,24 @@
       >
     </div>
     <mat-slider discrete min="1" max="48" class="responsive-input">
-      <input matSliderThumb value="24" />
+      <input
+        matSliderThumb
+        value="24"
+        id="prazoPagamento"
+        formControlName="prazoPagamento"
+      />
     </mat-slider>
   </form>
   <div class="button-container">
     <button mat-stroked-button class="button-cancelar" (click)="goBack()">
       Cancelar
     </button>
-    <button mat-flat-button class="button-salvar" (click)="postProposta()">
+    <button
+      mat-flat-button
+      class="button-salvar"
+      (click)="postProposta()"
+      type="submit"
+    >
       Salvar
     </button>
   </div>
