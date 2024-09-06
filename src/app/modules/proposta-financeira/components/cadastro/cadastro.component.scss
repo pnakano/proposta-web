@@ -1,19 +1,3 @@
-.responsive-container {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .responsive-container {
-    flex-direction: column;
-  }
-}
-
-.responsive-input {
-  width: 100%;
-}
-
 .right-align {
   text-align: right;
 }
@@ -21,10 +5,6 @@
 input.right-align::-webkit-outer-spin-button,
 input.right-align::-webkit-inner-spin-button {
   display: none;
-}
-
-input.right-align {
-  -moz-appearance: textfield;
 }
 
 .base-card {
@@ -44,4 +24,17 @@ input.right-align {
 
 .button-salvar {
   order: 2;
+}
+
+.prazo-pagamento-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.progress-bar-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }

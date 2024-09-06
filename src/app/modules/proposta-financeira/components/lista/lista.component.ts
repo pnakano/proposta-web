@@ -8,10 +8,10 @@ import { PropostaResponseDto } from '../../models/proposta-response-dto';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalActionComponent } from '../../../../shared/components/modal-action/modal-action.component';
-import { Title } from '@angular/platform-browser';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-lista',
   standalone: true,
   imports: [
     HttpClientModule,
@@ -19,12 +19,13 @@ import { Title } from '@angular/platform-browser';
     MatButtonModule,
     MatTableModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   providers: [PropostaFinanceiraService],
-  templateUrl: './list.component.html',
-  styleUrl: './list.component.scss',
+  templateUrl: './lista.component.html',
+  styleUrl: './lista.component.scss',
 })
-export class ListComponent implements OnInit {
+export class ListaComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'nome',
@@ -34,8 +35,9 @@ export class ListComponent implements OnInit {
   ];
 
   propostas: PropostaResponseDto[] = [];
+  isLoading: boolean = false;
 
-  readonly dialog = inject(MatDialog);
+  readonly observacaoDialog = inject(MatDialog);
 
   constructor(
     private propostaFinanceiraService: PropostaFinanceiraService,
@@ -47,9 +49,19 @@ export class ListComponent implements OnInit {
   }
 
   getPropostas(): void {
-    this.propostaFinanceiraService.getPropostas().subscribe((propostas) => {
-      console.log(propostas);
-      this.propostas = propostas;
+    this.isLoading = true;
+    this.propostaFinanceiraService.getPropostas().subscribe({
+      next: (propostas) => {
+        //Timeout utilizado para testar o loader
+        setTimeout(() => {
+          this.propostas = propostas;
+          this.isLoading = false;
+        }, 1500);
+      },
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;
+      },
     });
   }
 
@@ -65,7 +77,7 @@ export class ListComponent implements OnInit {
   }
 
   openDialog(observacao: string) {
-    this.dialog.open(ModalActionComponent, {
+    this.observacaoDialog.open(ModalActionComponent, {
       data: {
         title: 'Observação',
         description: observacao,

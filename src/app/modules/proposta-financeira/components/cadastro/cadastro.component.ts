@@ -16,10 +16,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskDirective } from 'ngx-mask';
-import { InputErrorComponent } from '../../../../shared/components/input-error/input-error.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ValidatorsUtils } from '../../../../shared/utils/validator.utils';
 
 @Component({
-  selector: 'app-crud',
+  selector: 'app-cadastro',
   standalone: true,
   imports: [
     HttpClientModule,
@@ -32,14 +33,16 @@ import { InputErrorComponent } from '../../../../shared/components/input-error/i
     MatSliderModule,
     MatCardModule,
     NgxMaskDirective,
-    InputErrorComponent,
+    MatProgressBarModule,
   ],
   providers: [PropostaFinanceiraService],
-  templateUrl: './crud.component.html',
-  styleUrl: './crud.component.scss',
+  templateUrl: './cadastro.component.html',
+  styleUrl: './cadastro.component.scss',
 })
-export class CrudComponent {
-  crudForm: FormGroup = this.formBuilder.group({
+export class CadastroComponent {
+  isSaving: boolean = false;
+
+  cadastroForm: FormGroup = this.formBuilder.group({
     nome: [null, Validators.required],
     sobrenome: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
@@ -57,19 +60,28 @@ export class CrudComponent {
   ) {}
 
   postProposta(): void {
-    this.crudForm.markAllAsTouched();
-    if (!this.crudForm.valid) {
-      return;
+    this.cadastroForm.markAllAsTouched();
+
+    if (this.cadastroForm.valid) {
+      this.isSaving = true;
+      this.cadastroForm.disable();
+
+      //Timeout utilizado para testar o loader
+      setTimeout(() => {
+        this.propostaFinanceiraService
+          .postProposta(this.cadastroForm.value)
+          .subscribe((proposta) => this.goBack());
+      }, 3000);
     }
-    this.propostaFinanceiraService
-      .postProposta(this.crudForm.value)
-      .subscribe((proposta) => {
-        console.log(proposta);
-        this.goBack();
-      });
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  getError(controlName: string): string {
+    return ValidatorsUtils.getErrorMessage(
+      this.cadastroForm.controls[controlName]
+    );
   }
 }

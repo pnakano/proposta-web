@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { ListComponent } from './modules/proposta-financeira/components/list/list.component';
-import { CrudComponent } from './modules/proposta-financeira/components/crud/crud.component';
+import { ListaComponent } from './modules/proposta-financeira/components/lista/lista.component';
+import { CadastroComponent } from './modules/proposta-financeira/components/cadastro/cadastro.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'propostas', pathMatch: 'full' },
-  { path: 'propostas', component: ListComponent },
-  { path: 'propostas/cadastro', component: CrudComponent },
+  { path: 'propostas', component: ListaComponent },
+  { path: 'propostas/cadastro', component: CadastroComponent },
 ];

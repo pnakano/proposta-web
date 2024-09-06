@@ -9,6 +9,4 @@ import { ToolbarComponent } from './shared/components/toolbar/toolbar.component'
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'Cadastro de Propostas';
-}
+export class AppComponent {}
