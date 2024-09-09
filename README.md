@@ -1,27 +1,65 @@
-# PropostaWeb
+# Aplicação Front-End - Cadastro de Propostas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+## Descrição
+Aplicação front-end desenvolvida em Angular para o projeto desenvolvido durante o curso "Microsserviços com Spring e RabbitMQ" de Matheus Pieropan. 
+O objetivo do projeto é utilizar uma arquitetura event-driven para permitir o cadastro de uma proposta de crédito pelo microsserviço de proposta, simular se o cliente será aprovado ou reprovado com base em um sistema de pontuação pelo microsserviço de análise de crédito e retornar o status do cliente para a aplicação de proposta. Durante essas transações, o microsserviço de notificacao será responsável por notificar o usuário via e-mail sobre o status de sua solicitação. 
 
-## Development server
+<p><img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white" alt="shields"></p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Por essa aplicação, é possível cadastrar novas propostas, fazendo uso da API implementada no micro-serviço [proposta-app](https://github.com/pnakano/proposta-app), e acompanhar o status após o processamento realizado no micro-serviço [analise-credito](https://github.com/pnakano/proposta-analisecredito).
 
-## Code scaffolding
+### Microsserviços do Projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [config-server](https://github.com/pnakano/proposta-config)
+- [proposta-app](https://github.com/pnakano/proposta-app)
+- [analise-credito](https://github.com/pnakano/proposta-analisecredito)
+- [notificacao](https://github.com/pnakano/proposta-notificacao)
+
+### Aplicação Front-End
+- [proposta-web](https://github.com/pnakano/proposta-web)
+
+### Conteúdo do curso
+
+- Implementação do ecossistema Spring
+- Compreensão de como funciona uma arquitetura de microsserviços
+- Entender como funciona comunicação assíncrona
+- Utilização de Docker para acesso ao RabbitmQ e Postgres
+- Criação de filas/exchange/dlq no rabbitMQ. Visualização no painel administrativo
+- Abordagem de alguns conceitos de programação em Java (Utilização de Strategy, criação de exceções, etc)
+- <s>Implementação de notificação via SMS utilizando o SNS da AWS</s> (Não implementado)
+
+#### Implementações Adicionais:
+
+- Implementação do Config Server via repositório Git
+- Serviço de notificação por e-mail utilizando o RabbitMQ e Spring Email
+- Configuração do docker-compose para que a aplicação funcione totalmente em containers
+- Aplicação Front-end em Angular para cadastro das propostas
+
+## Requisitos
+
+- [Node.js v20+](https://nodejs.org/pt/download/package-manager)
+- Para salvar e carregar os registros: [proposta-app](https://github.com/pnakano/proposta-app)
+- Para processar a análise e retornar a situação: [analise-credito](https://github.com/pnakano/proposta-analisecredito)
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```shell
+ng build
+```
 
-## Running unit tests
+## Run
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```shell
+ng serve
+```
 
-## Running end-to-end tests
+A aplicação será executada em http://localhost:4200
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Links
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* [UDEMY | Microsserviços com Spring e RabbitMQ + AWS](https://www.udemy.com/course/microsservicos-com-spring-e-rabbitmq-aws/)
+
+## Mais Informações - Angular CLI
+
+Para mais ajuda utilizando o Angular CLI, execute `ng help` ou verifique a página de [ajuda oficial do Angular CLI](https://angular.io/cli).
